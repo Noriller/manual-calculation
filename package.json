@@ -1,0 +1,88 @@
+{
+  "name": "@noriller/manual-calculation",
+  "private": false,
+  "version": "0.0.0",
+  "description": "Base 10 calculation algorithm using strings. This is basically how you would calculate on paper.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore --fix .",
+    "test": "jest --watch --verbose",
+    "test:ci": "jest --verbose",
+    "test:cov": "jest --coverage --silent --watchAll",
+    "prepare": "husky install",
+    "cleanDist": "npx rimraf dist/*",
+    "build": "tsc",
+    "prebuild:prod": "yarn cleanDist",
+    "build:prod": "tsc -p ./tsconfig.build.json && tsc -p ./tsconfig.nocomments.json",
+    "prepackPublish": "yarn build:prod",
+    "packPublish": "node buildPack.js",
+    "packPublish:dryRun": "yarn packPublish && npm publish ./out/*.tgz --dry-run",
+    "packPublish:publish": "yarn packPublish && yarn publish ./out/*.tgz"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@types/jest": "^26.0.22",
+    "@types/node": "^16.0.0",
+    "@types/supertest": "^2.0.10",
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
+    "copyfiles": "^2.4.1",
+    "eslint": "^7.22.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^7.0.0",
+    "jest": "^27.0.6",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.2.1",
+    "supertest": "^6.1.3",
+    "ts-jest": "^27.0.3",
+    "ts-loader": "^9.2.3",
+    "ts-node": "^10.0.0",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^4.2.3"
+  },
+  "author": "Bruno Noriller <brunonoriller@gmail.com> (https://github.com/Noriller)",
+  "bugs": {
+    "url": "https://github.com/Noriller/manual-calculation/issues"
+  },
+  "homepage": "https://github.com/Noriller/manual-calculation",
+  "keywords": [
+    "calculation",
+    "calculator"
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "coverageThreshold": {
+      "global": {
+        "statements": 99,
+        "branches": 95,
+        "functions": 100,
+        "lines": 99
+      }
+    },
+    "testEnvironment": "node"
+  },
+  "lint-staged": {
+    "*.{js,ts}": "yarn lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Noriller/manual-calculation.git"
+  }
+}
