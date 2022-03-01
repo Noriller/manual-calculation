@@ -1,4 +1,8 @@
+import { getFloatPosition } from '../shared/getFloatPosition';
+
 export function Sum(...numbers: string[]): string {
+  if (numbers.length === 0) return '0';
+
   const biggestFloat = Math.max(...numbers.map(n => getFloatPosition(n)));
 
   const normalizedFloats = numbers.map(n => {
@@ -48,9 +52,4 @@ export function Sum(...numbers: string[]): string {
   }
 
   return sum;
-}
-
-function getFloatPosition(n: string): number {
-  const float = n.lastIndexOf('.');
-  return float === -1 ? -1 : n.length - float - 1;
 }

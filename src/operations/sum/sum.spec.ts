@@ -1,6 +1,14 @@
 import { Sum } from './sum';
 
 describe('sum', () => {
+  it('should add no numbers', () => {
+    expect(Sum()).toBe('0');
+  });
+
+  it('should add one number', () => {
+    expect(Sum('2')).toBe('2');
+  })
+
   it('adds 1 + 2 to equal 3', () => {
     expect(Sum('1', '2')).toStrictEqual('3');
   });
