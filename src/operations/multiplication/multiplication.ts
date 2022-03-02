@@ -1,12 +1,4 @@
-// 0123456789;
-// --------15;
-// 0617283945;
-// 1234567890;
-// ----------;
-// 1851851835;
-// 1851851835;
-
-import { Sum } from './operations/sum/sum';
+import { Sum } from '../sum/sum';
 
 export function Multiplication(a: string, b: string): string {
   const toSum = [];
@@ -35,7 +27,6 @@ export function Multiplication(a: string, b: string): string {
     toSum.push(paddedValue);
   }
 
-  console.log(toSum);
   return Sum(...toSum);
 }
 
@@ -69,4 +60,8 @@ export function Multiplication(a: string, b: string): string {
 
 // Sum(
 //        '01111111101', '09876543120', '86419752300', '0740740734000', '6172839450000', '049382715600000', '370370367000000', '02469135780000000', '12345678900000000'
-//     ); //?   
+//     ); //?
+
+// BigInt(BigInt(1234567899999999) * BigInt(1234567899999999)); //?
+
+// Multiplication('1234567899999999', '1234567899999999'); //?
