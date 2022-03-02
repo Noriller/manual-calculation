@@ -27,21 +27,21 @@ export function Sum(...numbers: string[]): string {
   const paddedNumbers = normalizedNumbers.map(n => n.padStart(numbersToSum, '0'));
 
   let sum = '';
-  let carry = 0;
+  let carry = BigInt(0);
 
   while (numbersToSum > 0) {
     const digits = paddedNumbers.map(n => Number(n[numbersToSum - 1]));
-    let sumDigit = digits.reduce((acc, curr) => acc + curr, 0) + carry;
-    carry = 0;
+    const sumDigit = (digits.reduce(
+      (acc, curr) => BigInt(acc) + BigInt(curr), BigInt(0)
+    ) + BigInt(carry)).toString().split('');
 
-    while (sumDigit > 9 && numbersToSum > 1) {
-      sumDigit -= 10;
-      carry += 1;
-    }
-
-    sum = sumDigit.toString().concat(sum);
+    sum = sumDigit.pop().concat(sum);
+    carry = BigInt(sumDigit.join(''));
     numbersToSum--;
   }
+
+  const carryLeft = carry === BigInt(0) ? '' : carry.toString();
+  sum = carryLeft.concat(sum);
 
   if (biggestFloat > -1) {
     const floatPosition = sum.length - biggestFloat;
