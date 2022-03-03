@@ -43,12 +43,17 @@ export function Sum(...numbers: string[]): string {
   const carryLeft = carry === BigInt(0) ? '' : carry.toString();
   sum = carryLeft.concat(sum);
 
+  if (biggestFloat === -1) {
+    sum = sum.replace(/^0+/, '');
+  }
+
   if (biggestFloat > -1) {
     const floatPosition = sum.length - biggestFloat;
-    return sum
+    const sumWithFloat = sum
       .substring(0, floatPosition)
       .concat('.')
       .concat(sum.substring(floatPosition));
+    return sumWithFloat.replace(/\.?0+$/, '');
   }
 
   return sum;
