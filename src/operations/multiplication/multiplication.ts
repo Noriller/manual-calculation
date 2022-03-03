@@ -1,17 +1,23 @@
+import { getFloatPosition } from '../shared/getFloatPosition';
 import { Sum } from '../sum/sum';
 
 export function Multiplication(a: string, b: string): string {
   const toSum = [];
 
-  for (let i = 0; i < b.length; i++) {
-    const { current, carry } = a.split('')
+  const floatPosition = getMultiplicationFloat(a, b);
+
+  const aNormalized = a.replace(/\D/g, '');
+  const bNormalized = b.replace(/\D/g, '');
+
+  for (let i = 0; i < bNormalized.length; i++) {
+    const { current, carry } = aNormalized.split('')
       .reduceRight((acc, curr) => {
         const currentDigit = (
-          (Number(curr) * Number(b[i])) + acc.carry
-        ).toString().split(''); ///?
+          (Number(curr) * Number(bNormalized[i])) + acc.carry
+        ).toString().split('');
 
-        acc.current = currentDigit.pop().concat(acc.current); ///?
-        acc.carry = Number(currentDigit.join('')); ///?
+        acc.current = currentDigit.pop().concat(acc.current);
+        acc.carry = Number(currentDigit.join(''));
 
         return acc;
       }, {
@@ -19,49 +25,58 @@ export function Multiplication(a: string, b: string): string {
         carry: 0
       });
 
-    const rightToLeftIndex = b.length - 1 - i; ///?
-    const carryLeft = carry === 0 ? '' : carry.toString(); ///?
+    const rightToLeftIndex = bNormalized.length - 1 - i;
+    const carryLeft = carry === 0 ? '' : carry.toString();
     const paddedValue = carryLeft.concat(
       current.concat('0'.repeat(rightToLeftIndex))
-    ); ///?
+    );
     toSum.push(paddedValue);
   }
 
-  return Sum(...toSum);
+  const sumValues = Sum(...toSum);
+
+  if (floatPosition === -1) {
+    return sumValues;
+  }
+
+  const finalLength = getFinalStringLength(sumValues, floatPosition);
+
+  const paddedSum = sumValues
+    .padStart(finalLength, '0');
+  const finalFloatPosition = finalLength - floatPosition;
+
+  return paddedSum
+    .substring(0, finalFloatPosition)
+    .concat('.')
+    .concat(paddedSum.substring(finalFloatPosition))
+    .replace(/0+$/, '')
+    .replace(/\.$/, '');
 }
 
-/*
 
-          123456789
-          123465789
-          ---------
-        01111111101
-        09876543120
-        86419752300
-      0740740734000
-      6172839450000
-    049382715600000
-    370370367000000
-  02469135780000000
-  12345678900000000
--------------------
-  16141578750190521
-*/
+function getFinalStringLength(finalValue: string, floatPosition: number) {
+  if (finalValue.length <= floatPosition) {
+    return floatPosition + 1;
+  }
 
-//'12345678900000000'
-// '2469135780000000'
-//  '370370367000000'
-//   '49382715600000'
-//    '6172839450000'
-//     '740740734000'
-//      '86419752300'
-//       '9876543120'
-//        '111111101'
+  return finalValue.length;
+}
 
-// Sum(
-//        '01111111101', '09876543120', '86419752300', '0740740734000', '6172839450000', '049382715600000', '370370367000000', '02469135780000000', '12345678900000000'
-//     ); //?
+function getMultiplicationFloat(a: string, b: string) {
+  const aFloat = getFloatPosition(a);
+  const bFloat = getFloatPosition(b);
 
-// BigInt(BigInt(1234567899999999) * BigInt(1234567899999999)); //?
+  if (aFloat === -1 && bFloat === -1) {
+    return -1;
+  }
 
-// Multiplication('1234567899999999', '1234567899999999'); //?
+  if (aFloat === -1) {
+    return bFloat;
+  }
+
+  if (bFloat === -1) {
+    return aFloat;
+  }
+
+  return aFloat + bFloat;
+}

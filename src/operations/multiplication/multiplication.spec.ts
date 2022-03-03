@@ -24,4 +24,24 @@ describe('multiplication', () => {
   it('should multiply 123456789 * 123456789 = 15241578750190521', () => {
     expect(Multiplication('123456789', '123456789')).toBe('15241578750190521');
   });
+
+  it('should multiply 0.1 * 10 = 1', () => {
+    expect(Multiplication('0.1', '10')).toBe('1');
+  });
+
+  it('should multiply 10 * 1.0 = 10', () => {
+    expect(Multiplication('10', '1.0')).toBe('10');
+  });
+
+  it('should multiply 10 * 0.5 = 5', () => {
+    expect(Multiplication('10', '0.5')).toBe('5');
+  });
+
+  it('should multiply 0.2 * 0.2 = 0.04', () => {
+    expect(Multiplication('0.2', '0.2')).toBe('0.04');
+  });
+
+  it('should multiply 0.02 * 0.2 = 0.04', () => {
+    expect(Multiplication('0.02', '0.2')).toBe('0.004');
+  });
 });
