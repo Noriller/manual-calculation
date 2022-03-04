@@ -1,19 +1,21 @@
 import { getFloatPosition } from '../shared/getFloatPosition';
 import { Sum } from '../sum/sum';
 
-export function Multiplication(a: string, b: string): string {
+export function Multiplication(
+  multiplicand: string, multiplier: string
+): string {
   const toSum = [];
 
-  const floatPosition = getMultiplicationFloat(a, b);
+  const floatPosition = getMultiplicationFloat(multiplicand, multiplier);
 
-  const aNormalized = a.replace(/\D/g, '');
-  const bNormalized = b.replace(/\D/g, '');
+  const multiplicandNormalized = multiplicand.replace(/\D/g, '');
+  const multiplierNormalized = multiplier.replace(/\D/g, '');
 
-  for (let i = 0; i < bNormalized.length; i++) {
-    const { current, carry } = aNormalized.split('')
+  for (let i = 0; i < multiplierNormalized.length; i++) {
+    const { current, carry } = multiplicandNormalized.split('')
       .reduceRight((acc, curr) => {
         const currentDigit = (
-          (Number(curr) * Number(bNormalized[i])) + acc.carry
+          (Number(curr) * Number(multiplierNormalized[i])) + acc.carry
         ).toString().split('');
 
         acc.current = currentDigit.pop().concat(acc.current);
@@ -25,7 +27,7 @@ export function Multiplication(a: string, b: string): string {
         carry: 0
       });
 
-    const rightToLeftIndex = bNormalized.length - 1 - i;
+    const rightToLeftIndex = multiplierNormalized.length - 1 - i;
     const carryLeft = carry === 0 ? '' : carry.toString();
     const paddedValue = carryLeft.concat(
       current.concat('0'.repeat(rightToLeftIndex))
@@ -62,21 +64,21 @@ function getFinalStringLength(finalValue: string, floatPosition: number) {
   return finalValue.length;
 }
 
-function getMultiplicationFloat(a: string, b: string) {
-  const aFloat = getFloatPosition(a);
-  const bFloat = getFloatPosition(b);
+function getMultiplicationFloat(multiplicand: string, multiplier: string) {
+  const multiplicandFloat = getFloatPosition(multiplicand);
+  const multiplierFloat = getFloatPosition(multiplier);
 
-  if (aFloat === -1 && bFloat === -1) {
+  if (multiplicandFloat === -1 && multiplierFloat === -1) {
     return -1;
   }
 
-  if (aFloat === -1) {
-    return bFloat;
+  if (multiplicandFloat === -1) {
+    return multiplierFloat;
   }
 
-  if (bFloat === -1) {
-    return aFloat;
+  if (multiplierFloat === -1) {
+    return multiplicandFloat;
   }
 
-  return aFloat + bFloat;
+  return multiplicandFloat + multiplierFloat;
 }
