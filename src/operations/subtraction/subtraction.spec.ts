@@ -52,4 +52,24 @@ describe('sum', () => {
   it('subtracts 2_000_000 - 1_000_000 to equal 1000000', () => {
     expect(Subtraction('2_000_000', '1_000_000')).toStrictEqual('1000000');
   });
+
+  it('subtracts 2 - 10 to equal -8', () => {
+    expect(Subtraction('2', '10')).toStrictEqual('-8');
+  });
+
+  it('subtracts 0.2 - 1 to equal -0.8', () => {
+    expect(Subtraction('0.2', '1')).toStrictEqual('-0.8');
+  });
+
+  it('subtracts 1 - 1.1 to equal -0.1', () => {
+    expect(Subtraction('1', '1.1')).toStrictEqual('-0.1');
+  });
+
+  it('subtracts 0.1 - 10 to equal -9.9', () => {
+    expect(Subtraction('0.1', '10')).toStrictEqual('-9.9');
+  });
+
+  it('subtracts 0 - 0.1 to equal -0.1', () => {
+    expect(Subtraction('0', '0.1')).toStrictEqual('-0.1');
+  });
 });

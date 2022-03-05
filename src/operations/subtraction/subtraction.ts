@@ -3,12 +3,23 @@ import { prepareNumbers } from '../shared/prepareNumbers';
 export function Subtraction(minuend: string, subtrahend: string): string {
   const {
     digitsQuantity,
-    paddedNumbers: [paddedMinuend, paddedSubtrahend],
+    paddedNumbers,
     biggestFloat
   } = prepareNumbers([minuend, subtrahend]);
 
   let subtraction = '';
   let carry = 0;
+
+  const {
+    orderedNumbers: [paddedMinuend, paddedSubtrahend],
+    finalSign,
+  } = (paddedNumbers[0] > paddedNumbers[1]) ? {
+    orderedNumbers: [paddedNumbers[0], paddedNumbers[1]],
+    finalSign: '+'
+  } : {
+      orderedNumbers: [paddedNumbers[1], paddedNumbers[0]],
+      finalSign: '-'
+    };
 
   // start right to left
   for (let i = digitsQuantity - 1; i >= 0; i--) {
@@ -26,9 +37,8 @@ export function Subtraction(minuend: string, subtrahend: string): string {
     subtraction = finalSubtractionValue.concat(subtraction);
   }
 
-  // if there's no float, clean zero's from the start
-  if (biggestFloat === -1) {
-    subtraction = subtraction.replace(/^0+/, '');
+  if (Number(subtraction) === 0) {
+    return '0';
   }
 
   // if there's a float, add the decimal point
@@ -36,13 +46,14 @@ export function Subtraction(minuend: string, subtrahend: string): string {
   // in case of only zero's after the decimal point, remove the decimal point
   if (biggestFloat > -1) {
     const floatPosition = subtraction.length - biggestFloat;
-    const sumWithFloat = subtraction
+    subtraction = subtraction
       .substring(0, floatPosition)
       .concat('.')
-      .concat(subtraction.substring(floatPosition));
-    return sumWithFloat.replace(/\.?0+$/, '');
+      .concat(subtraction.substring(floatPosition))
+      .replace(/\.?0+$/, '');
   }
 
-  // after the cleaning, a empty string means 0
-  return subtraction.length > 0 ? subtraction : '0';
+  subtraction = subtraction.replace(/^0+(?!\.)/, '');
+
+  return finalSign === "-" ? finalSign.concat(subtraction) : subtraction;
 }
