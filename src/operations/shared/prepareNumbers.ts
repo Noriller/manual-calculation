@@ -4,6 +4,9 @@ export function prepareNumbers(numbers: string[]) {
   // get the biggest float of all numbers
   const biggestFloat = Math.max(...numbers.map(n => getFloatPosition(n)));
 
+  // get the signs of the numbers as -1 or 1
+  const signs = numbers.map(n => n[0] === '-' ? -1 : 1);
+
   // pad each number after the float to have the same length
   const normalizedFloats = numbers.map(n => {
     const currentFloat = getFloatPosition(n);
@@ -29,5 +32,5 @@ export function prepareNumbers(numbers: string[]) {
   // pad each number with 0s to have the same length
   const paddedNumbers = normalizedNumbers.map(n => n.padStart(digitsQuantity, '0'));
 
-  return { digitsQuantity, paddedNumbers, biggestFloat };
+  return { digitsQuantity, paddedNumbers, biggestFloat, signs };
 }

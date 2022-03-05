@@ -71,4 +71,28 @@ describe('sum', () => {
   it('adds 1_000_000 + 2_000_000 to equal 3000000', () => {
     expect(Sum('1_000_000', '2_000_000')).toStrictEqual('3000000');
   });
+
+  it('adds 1 + -2 to equal -1', () => {
+    expect(Sum('1', '-2')).toStrictEqual('-1');
+  });
+
+  it('adds -1 + -2 to equal -3', () => {
+    expect(Sum('-1', '-2')).toStrictEqual('-3');
+  });
+
+  it('adds -123456 + -234567 + -345678 to equal -703701', () => {
+    expect(Sum('-123456', '-234567', '-345678')).toStrictEqual('-703701');
+  });
+
+  it('adds -123456 + -234567 + 345678 to equal -12345', () => {
+    expect(Sum('-123456', '-234567', '345678')).toStrictEqual('-12345');
+  });
+
+  it('adds -123.456 + -23456.7 + -3.45678 to equal -23583.61278', () => {
+    expect(Sum('-123.456', '-23456.7', '-3.45678')).toStrictEqual('-23583.61278');
+  });
+
+  it('adds -123.456 + -23456.7 + 3.45678 to equal -23576.69922', () => {
+    expect(Sum('-123.456', '-23456.7', '3.45678')).toStrictEqual('-23576.69922');
+  });
 });
