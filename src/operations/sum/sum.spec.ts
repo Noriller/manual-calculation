@@ -28,7 +28,7 @@ describe('sum', () => {
     expect(Sum('1', '123456789132456789')).toStrictEqual('123456789132456790');
   });
 
-  it('adds 1 + 1++ 1 to equal 3', () => {
+  it('adds 1 + 1 + 1 to equal 3', () => {
     expect(Sum('1', '1', '1')).toStrictEqual('3');
   });
 

@@ -9,10 +9,6 @@ describe('sum', () => {
     expect(Subtraction('2', '2')).toStrictEqual('0');
   });
 
-  it('subtracts 2 - 2 to equal 2', () => {
-    expect(Subtraction('2', '2')).toStrictEqual('0');
-  });
-
   it('subtracts 10 - 2 to equal 8', () => {
     expect(Subtraction('10', '2')).toStrictEqual('8');
   });
@@ -23,6 +19,10 @@ describe('sum', () => {
 
   it('subtracts 1000 - 2 to equal 998', () => {
     expect(Subtraction('1000', '2')).toStrictEqual('998');
+  });
+
+  it('subtracts 123456789123456789123456789 - 1 to equal 123456789123456789123456790', () => {
+    expect(Subtraction('123456789123456789123456789', '1')).toStrictEqual('123456789123456789123456788');
   });
 
   it('subtracts 1 - 0.1 to equal 0.9', () => {

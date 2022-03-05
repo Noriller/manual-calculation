@@ -41,7 +41,11 @@ describe('multiplication', () => {
     expect(Multiplication('0.2', '0.2')).toBe('0.04');
   });
 
-  it('should multiply 0.02 * 0.2 = 0.04', () => {
+  it('should multiply 0.02 * 0.2 = 0.004', () => {
     expect(Multiplication('0.02', '0.2')).toBe('0.004');
+  });
+
+  it('should multiply 0.200 * 0.200 = 0.04', () => {
+    expect(Multiplication('0.200', '0.200')).toBe('0.04');
   });
 });
