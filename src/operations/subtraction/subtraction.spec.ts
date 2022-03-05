@@ -72,4 +72,28 @@ describe('sum', () => {
   it('subtracts 0 - 0.1 to equal -0.1', () => {
     expect(Subtraction('0', '0.1')).toStrictEqual('-0.1');
   });
+
+  it('subtracts -1 - 2 to equal -3', () => {
+    expect(Subtraction('-1', '2')).toStrictEqual('-3');
+  });
+
+  it('subtracts -2 - 1 to equal -3', () => {
+    expect(Subtraction('-2', '1')).toStrictEqual('-3');
+  });
+
+  it('subtracts 1 - -2 to equal 3', () => {
+    expect(Subtraction('1', '-2')).toStrictEqual('3');
+  });
+
+  it('subtracts 2 - -1 to equal 3', () => {
+    expect(Subtraction('2', '-1')).toStrictEqual('3');
+  });
+
+  it('subtracts -1 - -2 to equal 1', () => {
+    expect(Subtraction('-1', '-2')).toStrictEqual('1');
+  });
+
+  it('subtracts -2 - -1 to equal -1', () => {
+    expect(Subtraction('-2', '-1')).toStrictEqual('-1');
+  });
 });

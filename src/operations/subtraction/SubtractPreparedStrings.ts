@@ -1,5 +1,5 @@
 
-export function SubtractPreparedStrings(digitsQuantity: number, paddedNumbers: string[]) {
+export function subtractPreparedStrings(digitsQuantity: number, paddedNumbers: string[]) {
   const {
     orderedNumbers: [paddedMinuend, paddedSubtrahend], finalSign,
   } = (paddedNumbers[0] > paddedNumbers[1])

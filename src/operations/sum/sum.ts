@@ -1,7 +1,7 @@
 import { prepareNumbers } from '../shared/prepareNumbers';
 import { cleanOutput } from '../shared/cleanOutput';
 import { Subtraction as Subtraction } from '../subtraction/subtraction';
-import { SubtractPreparedStrings } from "../subtraction/SubtractPreparedStrings";
+import { subtractPreparedStrings } from "../subtraction/SubtractPreparedStrings";
 import { sumPreparedStrings } from './sumPreparedStrings';
 
 export function Sum(...numbers: string[]): string {
@@ -30,7 +30,7 @@ export function Sum(...numbers: string[]): string {
   const secondPadding = [positiveSum, negativeSum]
     .map(s => s.padStart(newDigitQuantity, '0'));
 
-  let { subtraction: sum, finalSign } = SubtractPreparedStrings(newDigitQuantity, secondPadding);
+  let { subtraction: sum, finalSign } = subtractPreparedStrings(newDigitQuantity, secondPadding);
 
   return cleanOutput(sum, biggestFloat, finalSign);
 }
