@@ -1,6 +1,6 @@
 import { Subtraction } from './subtraction';
 
-describe('sum', () => {
+describe('subtraction', () => {
   it('subtracts 2 - 1 to equal 1', () => {
     expect(Subtraction('2', '1')).toStrictEqual('1');
   });
