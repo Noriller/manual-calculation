@@ -6,8 +6,14 @@ export function addFloatToString(number: string, floatPosition: number) {
 
   // pad the string with zeros to the final length
   const paddedSum = number.padStart(finalLength, '0');
+
+  // it should come to this function when a float is needed
+  // if the final length is the same as the original length,
+  // then the float position is after the first digit
+  const fixFloatPosition = finalLength === floatPosition ? 1 : 0;
+
   // find the index of the float divisor
-  const finalFloatPosition = finalLength - floatPosition;
+  const finalFloatPosition = finalLength - floatPosition + fixFloatPosition;
 
   // split the string at the float divisor
   // add the float divisor
@@ -26,7 +32,7 @@ export function addFloatToString(number: string, floatPosition: number) {
  * @example result "1" for a float 2 (0.01) returns final length 3
  */
 function getFinalStringLength(finalValue: string, floatPosition: number) {
-  if (finalValue.length <= floatPosition) {
+  if (finalValue.length < floatPosition) {
     return floatPosition + 1;
   }
 

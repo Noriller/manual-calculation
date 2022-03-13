@@ -49,6 +49,18 @@ describe('division', () => {
     expect(Division('10', '2.5')).toEqual('4');
   });
 
+  it('should divide 1.8 / 2 = 0.9', () => {
+    expect(Division('1.8', '2')).toEqual('0.9');
+  });
+
+  it('should divide 1.88 / 2.2 = 0.9', () => {
+    expect(Division('8.25', '1.5')).toEqual('5.5');
+  });
+
+  it('should divide 9 / 2 = 4.5', () => {
+    expect(Division('9', '2')).toEqual('4.5');
+  });
+
   it('should divide 9.9 / 1.1 = 9', () => {
     expect(Division('9.9', '1.1')).toEqual('9');
   });

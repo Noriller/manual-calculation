@@ -1,6 +1,5 @@
 import { addFloatToString } from '../shared/addFloatToString';
 import { getFloatPosition } from '../shared/getFloatPosition';
-import { prepareNumbers } from '../shared/prepareNumbers';
 import { Subtraction } from '../subtraction/subtraction';
 import { Sum } from '../sum/sum';
 
@@ -12,8 +11,8 @@ export function Division(divisor: string, dividend: string, maxDigits = 10): str
     throw new Error('Division by zero');
   }
 
-  let divisorFloat = getFloatPosition(divisor); //?
-  let dividendFloat = getFloatPosition(dividend); //?
+  let divisorFloat = getFloatPosition(divisor);
+  let dividendFloat = getFloatPosition(dividend);
   const maxFloat = Math.max(divisorFloat, dividendFloat);
 
   const paddedNumbers = [divisor, dividend];
@@ -34,14 +33,14 @@ export function Division(divisor: string, dividend: string, maxDigits = 10): str
     } else {
       return '+';
     }
-  }); //?
+  });
 
   let preparedNumbers = paddedNumbers.map(number => {
     return number.replace(/\D/, '');
-  }); //?
+  });
 
   let quotient = '';
-  let currentDivisor = preparedNumbers[0]; //?
+  let currentDivisor = preparedNumbers[0];
   let digits = 0;
   let startWithZero = false;
   let zeroAppends = 0;
@@ -62,8 +61,8 @@ export function Division(divisor: string, dividend: string, maxDigits = 10): str
 
     if (digits > maxDigits) break;
 
-    currentDivisor = Subtraction(currentDivisor, preparedNumbers[1]); //?
-    quotient = Sum(quotient, '1'); //?
+    currentDivisor = Subtraction(currentDivisor, preparedNumbers[1]);
+    quotient = Sum(quotient, '1');
   }
 
   if (zeroAppends > 0) {
@@ -73,7 +72,7 @@ export function Division(divisor: string, dividend: string, maxDigits = 10): str
   if (startWithZero) {
     quotient = '0.'.concat(quotient);
   } else if (digits > 0) {
-    quotient = addFloatToString(quotient, digits - 1);
+    quotient = addFloatToString(quotient, digits);
   }
 
   quotient = quotient.replace(/\.?0+$/, '');
