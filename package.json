@@ -20,8 +20,8 @@
     "packPublish": "node buildPack.js",
     "packPublish:dryRun": "yarn packPublish && npm publish ./out/*.tgz --dry-run",
     "packPublish:publish": "yarn packPublish && yarn publish ./out/*.tgz",
-    "benchmark": "yarn build:prod && ./benchmark.sh",
-    "benchmark:sh": "./benchmark.sh"
+    "benchmark:run": "for file in benchmark/*; do node \"$file\"; done",
+    "benchmark": "yarn build:prod && yarn benchmark:run"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
