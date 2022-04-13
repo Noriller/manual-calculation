@@ -53,7 +53,7 @@ describe('division', () => {
     expect(Division('1.8', '2')).toEqual('0.9');
   });
 
-  it('should divide 1.88 / 2.2 = 0.9', () => {
+  it('should divide 8.25 / 1.5 = 5.5', () => {
     expect(Division('8.25', '1.5')).toEqual('5.5');
   });
 
@@ -82,7 +82,9 @@ describe('division', () => {
   });
 
   it('should divide 1 / 1000000000000000000000 = 0.000000000000000000001', () => {
-    expect(Division('1', '1000000000000000000000', 100)).toEqual('0.000000000000000000001');
+    expect(Division('1', '1000000000000000000000', 100)).toEqual(
+      '0.000000000000000000001',
+    );
   });
 
   it('should divide 245850922 / 78256779 = 3.1415926535', () => {
