@@ -2,7 +2,7 @@
   "name": "@noriller/manual-calculation",
   "private": false,
   "version": "0.0.0",
-  "description": "Base 10 calculation algorithm using strings. This is basically how you would calculate on paper.",
+  "description": "Base 10 calculation algorithm using strings. This is basically how you would calculate on pen and paper.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
@@ -19,7 +19,9 @@
     "prepackPublish": "yarn build:prod",
     "packPublish": "node buildPack.js",
     "packPublish:dryRun": "yarn packPublish && npm publish ./out/*.tgz --dry-run",
-    "packPublish:publish": "yarn packPublish && yarn publish ./out/*.tgz"
+    "packPublish:publish": "yarn packPublish && yarn publish ./out/*.tgz",
+    "benchmark": "yarn build:prod && ./benchmark.sh",
+    "benchmark:sh": "./benchmark.sh"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",

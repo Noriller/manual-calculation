@@ -15,6 +15,11 @@
     "baseUrl": "./",
     "incremental": false,
     "noEmit": false,
-    "noEmitHelpers": false
+    "noEmitHelpers": false,
   },
+  "exclude": [
+    "node_modules",
+    "benchmark",
+    "dist",
+  ],
 }
