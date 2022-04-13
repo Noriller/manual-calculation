@@ -22,7 +22,9 @@ describe('subtraction', () => {
   });
 
   it('subtracts 123456789123456789123456789 - 1 to equal 123456789123456789123456790', () => {
-    expect(Subtraction('123456789123456789123456789', '1')).toStrictEqual('123456789123456789123456788');
+    expect(Subtraction('123456789123456789123456789', '1')).toStrictEqual(
+      '123456789123456789123456788',
+    );
   });
 
   it('subtracts 1 - 0.1 to equal 0.9', () => {
@@ -38,7 +40,9 @@ describe('subtraction', () => {
   });
 
   it('subtracts 123456789.132456789 - 0.000000001 to equal 123456789132456790', () => {
-    expect(Subtraction('123456789.132456789', '0.000000001')).toStrictEqual('123456789.132456788');
+    expect(Subtraction('123456789.132456789', '0.000000001')).toStrictEqual(
+      '123456789.132456788',
+    );
   });
 
   it('subtracts 0000001 - 0000000002 to equal 3', () => {

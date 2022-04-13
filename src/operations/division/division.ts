@@ -3,7 +3,7 @@ import { addFloatToString } from '../shared/addFloatToString';
 import { getFloatPosition } from '../shared/getFloatPosition';
 import { Subtraction } from '../subtraction/subtraction';
 import { Sum } from '../sum/sum';
-import { leftIsBigger, rightIsBigger } from '../shared/leftIsBigger';
+import { leftIsBigger } from '../shared/leftIsBigger';
 
 export function Division(
   divisor: string,

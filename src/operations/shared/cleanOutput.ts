@@ -1,4 +1,8 @@
-export function cleanOutput(finalNumber: string, biggestFloat: number, finalSign: string) {
+export function cleanOutput(
+  finalNumber: string,
+  biggestFloat: number,
+  finalSign: string,
+) {
   if (Number(finalNumber) === 0) {
     return '0';
   }
@@ -17,5 +21,5 @@ export function cleanOutput(finalNumber: string, biggestFloat: number, finalSign
   // remove trailing zeros from string, except for the first before the decimal point
   finalNumber = finalNumber.replace(/^0+(?!\.)/, '');
 
-  return finalSign === "-" ? finalSign.concat(finalNumber) : finalNumber;
+  return finalSign === '-' ? finalSign.concat(finalNumber) : finalNumber;
 }

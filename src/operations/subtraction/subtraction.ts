@@ -4,12 +4,9 @@ import { subtractPreparedStrings } from './SubtractPreparedStrings';
 import { sumPreparedStrings } from '../sum/sumPreparedStrings';
 
 export function Subtraction(minuend: string, subtrahend: string): string {
-  const {
-    digitsQuantity,
-    paddedNumbers,
-    biggestFloat,
-    signs,
-  } = prepareNumbers([minuend, subtrahend]);
+  const { digitsQuantity, paddedNumbers, biggestFloat, signs } = prepareNumbers(
+    [minuend, subtrahend],
+  );
 
   let subtraction, finalSign;
 
@@ -34,7 +31,7 @@ export function Subtraction(minuend: string, subtrahend: string): string {
   } else if (signs[0] === -1 && signs[1] === -1) {
     const result = subtractPreparedStrings(digitsQuantity, paddedNumbers);
     subtraction = result.subtraction;
-    finalSign = result.finalSign === "-" ? "+" : "-";
+    finalSign = result.finalSign === '-' ? '+' : '-';
   }
 
   return cleanOutput(subtraction, biggestFloat, finalSign);

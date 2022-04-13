@@ -3,7 +3,8 @@ import { Sum } from '../sum/sum';
 import { addFloatToString } from '../shared/addFloatToString';
 
 export function Multiplication(
-  multiplicand: string, multiplier: string
+  multiplicand: string,
+  multiplier: string,
 ): string {
   const toSum = [];
 
@@ -15,26 +16,31 @@ export function Multiplication(
   // for multiplication, the order is not important
   for (let i = 0; i < multiplierNormalized.length; i++) {
     // each multiplicand is multiplied right to left and then added the carry
-    const { current, carry } = multiplicandNormalized.split('')
-      .reduceRight((acc, curr) => {
+    const { current, carry } = multiplicandNormalized.split('').reduceRight(
+      (acc, curr) => {
         const currentDigit = (
-          (Number(curr) * Number(multiplierNormalized[i])) + acc.carry
-        ).toString().split('');
+          Number(curr) * Number(multiplierNormalized[i]) +
+          acc.carry
+        )
+          .toString()
+          .split('');
 
         acc.current = currentDigit.pop().concat(acc.current);
         acc.carry = Number(currentDigit.join(''));
 
         return acc;
-      }, {
+      },
+      {
         current: '',
-        carry: 0
-      });
+        carry: 0,
+      },
+    );
 
     // depending on the position of the multiplier, zero's are padded in the end
     const rightToLeftIndex = multiplierNormalized.length - 1 - i;
     const carryLeft = carry === 0 ? '' : carry.toString();
     const paddedValue = carryLeft.concat(
-      current.concat('0'.repeat(rightToLeftIndex))
+      current.concat('0'.repeat(rightToLeftIndex)),
     );
     // the result is pushed to the array to be summed
     toSum.push(paddedValue);
