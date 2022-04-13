@@ -3,6 +3,7 @@ import { addFloatToString } from '../shared/addFloatToString';
 import { getFloatPosition } from '../shared/getFloatPosition';
 import { Subtraction } from '../subtraction/subtraction';
 import { Sum } from '../sum/sum';
+import { leftIsBigger, rightIsBigger } from '../shared/leftIsBigger';
 
 export function Division(
   divisor: string,
@@ -48,6 +49,10 @@ export function Division(
     return number.replace(/\D/, '');
   });
 
+  /**
+   * This is a table we usually make when dividing a number by hand
+   * This allows us to easily find the biggest number possible to subtract
+   */
   const dividendMap = {
     1: preparedNumbers[1],
     2: Multiplication(preparedNumbers[1], '2'),
@@ -82,7 +87,7 @@ export function Division(
 
     if (digits > maxDigits) break;
 
-    const [toSubtract, quotientAdd] = getNumberToSubtract(
+    const { toSubtract, quotientAdd } = getNumberToSubtract(
       currentDivisor,
       dividendMap,
     );
@@ -111,44 +116,10 @@ export function Division(
 }
 
 /**
- * Return false only if left is bigger than right
+ * Find biggest number possible to subtract from current dividend
+ * the biggest number will be from 1 to 9 padded with enought zeros
+ * Returns the number toSubtract and the quotientAdd
  */
-function rightIsBigger(left: string, right: string): boolean {
-  return !leftIsBigger(left, right);
-}
-
-/**
- * Return true only if left is bigger than right
- */
-function leftIsBigger(left: string, right: string): boolean {
-  if (left.length > right.length) {
-    return true;
-  } else if (left.length < right.length) {
-    return false;
-  } else {
-    for (let i = 0; i < left.length; i++) {
-      if (left[i] > right[i]) {
-        return true;
-      } else if (left[i] < right[i]) {
-        return false;
-      }
-    }
-  }
-  return false;
-}
-
-type NumberMap = {
-  1: string;
-  2: string;
-  3: string;
-  4: string;
-  5: string;
-  6: string;
-  7: string;
-  8: string;
-  9: string;
-};
-
 function getNumberToSubtract(number: string, map: NumberMap) {
   const candidates = Object.entries(map).map(([key, value]) => {
     let candidateValue = value;
@@ -171,7 +142,7 @@ function getNumberToSubtract(number: string, map: NumberMap) {
     return [candidateValue, String(key).concat('0'.repeat(zeroes))];
   });
 
-  return candidates.reduce(
+  const [toSubtract, quotientAdd] = candidates.reduce(
     (acc, candidate) => {
       if (leftIsBigger(candidate[0], acc[0])) {
         return candidate;
@@ -181,4 +152,18 @@ function getNumberToSubtract(number: string, map: NumberMap) {
     },
     ['0', '0'],
   );
+
+  return { toSubtract, quotientAdd };
 }
+
+type NumberMap = {
+  1: string;
+  2: string;
+  3: string;
+  4: string;
+  5: string;
+  6: string;
+  7: string;
+  8: string;
+  9: string;
+};
