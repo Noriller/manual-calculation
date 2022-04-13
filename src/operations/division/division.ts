@@ -149,8 +149,8 @@ export function Division(
   }
 
   // we clean the string for cases finishing with a zero or on the float point
-  // it cleans: "x.", "x.0" and "x.000" (any number of zeroes)
-  quotient = quotient.replace(/\.?0*$/, '');
+  // it cleans: "x.", "x.0", "x.123000" and "x.000" (any number of zeroes)
+  quotient = quotient.replace(/(\.0+$|(?<=\..*)0+$|\.$)/, '');
 
   // we add the sign
   if (signs[0] !== signs[1] && quotient !== '0') {
@@ -176,7 +176,10 @@ function getNumberToSubtract(number: string, map: NumberMap) {
       // we try to add zeroes to the candidate
       const biggestCandidate = candidateValue.concat('0');
       // and check if it's bigger than the number
-      if (leftIsBigger(number, biggestCandidate)) {
+      if (
+        leftIsBigger(number, biggestCandidate) ||
+        number === biggestCandidate
+      ) {
         // we keep track of the zeroes to add in the quotient
         zeroes++;
         // reassign the candidate to try again

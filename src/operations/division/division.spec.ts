@@ -110,4 +110,8 @@ describe('division', () => {
   it('should divide with 0 decimal and discard the rest 1 / 3 = 0', () => {
     expect(Division('1', '3', 0)).toEqual('0');
   });
+
+  it('should divide 10000 / 2 = 5000', () => {
+    expect(Division('10000', '2')).toEqual('5000');
+  });
 });
