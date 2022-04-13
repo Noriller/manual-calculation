@@ -6,37 +6,37 @@ import { Sum } from '../sum/sum';
 import { leftIsBigger } from '../shared/leftIsBigger';
 
 export function Division(
-  divisor: string,
   dividend: string,
+  divisor: string,
   maxDigits = 10,
 ): string {
-  if (divisor === '0') {
+  if (dividend === '0') {
     throw new Error('Division of zero');
   }
-  if (dividend === '0') {
+  if (divisor === '0') {
     throw new Error('Division by zero');
   }
 
   // we add one more digit to be able to round numbers
   const maxDigitsForRounding = maxDigits + 1;
 
-  let divisorFloat = getFloatPosition(divisor);
   let dividendFloat = getFloatPosition(dividend);
-  const maxFloat = Math.max(divisorFloat, dividendFloat);
+  let divisorFloat = getFloatPosition(divisor);
+  const maxFloat = Math.max(dividendFloat, divisorFloat);
 
-  const paddedNumbers = [divisor, dividend];
+  const paddedNumbers = [dividend, divisor];
 
   // we get the bigger float point and pad the necessary zeros
   if (maxFloat > 0) {
-    if (divisorFloat > dividendFloat) {
-      dividendFloat = dividendFloat === -1 ? 0 : dividendFloat;
-      paddedNumbers[1] = dividend.concat(
-        '0'.repeat(divisorFloat - dividendFloat),
+    if (dividendFloat > divisorFloat) {
+      divisorFloat = divisorFloat === -1 ? 0 : divisorFloat;
+      paddedNumbers[1] = divisor.concat(
+        '0'.repeat(dividendFloat - divisorFloat),
       );
     } else {
-      divisorFloat = divisorFloat === -1 ? 0 : divisorFloat;
-      paddedNumbers[0] = divisor.concat(
-        '0'.repeat(dividendFloat - divisorFloat),
+      dividendFloat = dividendFloat === -1 ? 0 : dividendFloat;
+      paddedNumbers[0] = dividend.concat(
+        '0'.repeat(divisorFloat - dividendFloat),
       );
     }
   }
@@ -52,36 +52,36 @@ export function Division(
 
   // remove anything that is not a number
   const preparedNumbers = paddedNumbers.map((number) => {
-    return number.replace(/\D/, '');
+    return number.replace(/\D/g, '');
   });
 
-  const preparedDividend = preparedNumbers[1];
+  const preparedDivisor = preparedNumbers[1];
 
   /**
    * This is a table we usually make when dividing a number by hand
    * This allows us to easily find the biggest number possible to subtract
    */
-  const dividendMap = {
-    1: preparedDividend,
-    2: Multiplication(preparedDividend, '2'),
-    3: Multiplication(preparedDividend, '3'),
-    4: Multiplication(preparedDividend, '4'),
-    5: Multiplication(preparedDividend, '5'),
-    6: Multiplication(preparedDividend, '6'),
-    7: Multiplication(preparedDividend, '7'),
-    8: Multiplication(preparedDividend, '8'),
-    9: Multiplication(preparedDividend, '9'),
+  const divisorMap = {
+    1: preparedDivisor,
+    2: Multiplication(preparedDivisor, '2'),
+    3: Multiplication(preparedDivisor, '3'),
+    4: Multiplication(preparedDivisor, '4'),
+    5: Multiplication(preparedDivisor, '5'),
+    6: Multiplication(preparedDivisor, '6'),
+    7: Multiplication(preparedDivisor, '7'),
+    8: Multiplication(preparedDivisor, '8'),
+    9: Multiplication(preparedDivisor, '9'),
   };
 
   let quotient = '';
-  let currentDivisor = preparedNumbers[0];
+  let currentDividend = preparedNumbers[0];
   let digits = 0;
   let startWithZero = false;
   let zeroAppends = 0;
 
-  while (currentDivisor !== '0') {
-    // while the dividend is greater than the current divisor
-    while (leftIsBigger(preparedDividend, currentDivisor)) {
+  while (currentDividend !== '0') {
+    // while the divisor is greater than the current dividend
+    while (leftIsBigger(preparedDivisor, currentDividend)) {
       // we stop with there's enough digits
       if (++digits > maxDigitsForRounding) break;
       // if there's no quotient
@@ -98,8 +98,8 @@ export function Division(
         // we simply append a zero if there's already some quotient
         quotient = quotient.concat('0');
       }
-      // finally we append a zero to the divisor
-      currentDivisor = currentDivisor.concat('0');
+      // finally we append a zero to the dividend
+      currentDividend = currentDividend.concat('0');
     }
 
     // we need to also break here to exit the main loop
@@ -107,14 +107,14 @@ export function Division(
       break;
     }
 
-    // we get the number to subtract from the divisor
+    // we get the number to subtract from the dividend
     // and how much to add to the quotient
     const { toSubtract, quotientAdd } = getNumberToSubtract(
-      currentDivisor,
-      dividendMap,
+      currentDividend,
+      divisorMap,
     );
 
-    currentDivisor = Subtraction(currentDivisor, toSubtract);
+    currentDividend = Subtraction(currentDividend, toSubtract);
     quotient = Sum(quotient, quotientAdd);
   }
 
@@ -161,7 +161,7 @@ export function Division(
 }
 
 /**
- * Find biggest number possible to subtract from current dividend
+ * Find biggest number possible to subtract from current divisor
  * the biggest number will be from 1 to 9 padded with enought zeros
  * Returns the number toSubtract and the quotientAdd
  */
@@ -187,7 +187,7 @@ function getNumberToSubtract(number: string, map: NumberMap) {
       }
     }
 
-    // we ignore the possible candidate if it's bigger than the current dividend
+    // we ignore the possible candidate if it's bigger than the current divisor
     if (leftIsBigger(candidateValue, number)) {
       return ['0', '0'];
     }
