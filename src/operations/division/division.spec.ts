@@ -90,4 +90,8 @@ describe('division', () => {
   it('should divide 245850922 / 78256779 = 3.1415926535', () => {
     expect(Division('245850922', '78256779')).toEqual('3.1415926535');
   });
+
+  it('should divide 244 / 2 = 122', () => {
+    expect(Division('244', '2')).toEqual('122');
+  });
 });

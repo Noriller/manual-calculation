@@ -89,8 +89,6 @@ export function Division(
 
     currentDivisor = Subtraction(currentDivisor, toSubtract);
     quotient = Sum(quotient, quotientAdd);
-
-    // ----
   }
 
   if (zeroAppends > 0) {
@@ -113,14 +111,14 @@ export function Division(
 }
 
 /**
- * TODO: equals probably returns true
+ * Return false only if left is bigger than right
  */
 function rightIsBigger(left: string, right: string): boolean {
   return !leftIsBigger(left, right);
 }
 
 /**
- * TODO: equals changed to return false, maybe return something else
+ * Return true only if left is bigger than right
  */
 function leftIsBigger(left: string, right: string): boolean {
   if (left.length > right.length) {
