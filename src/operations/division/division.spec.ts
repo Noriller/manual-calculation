@@ -88,10 +88,26 @@ describe('division', () => {
   });
 
   it('should divide 245850922 / 78256779 = 3.1415926535', () => {
-    expect(Division('245850922', '78256779')).toEqual('3.1415926535');
+    expect(Division('245850922', '78256779')).toEqual('3.1415926536');
   });
 
   it('should divide 244 / 2 = 122', () => {
     expect(Division('244', '2')).toEqual('122');
+  });
+
+  it('should divide with 2 decimal and round up the last one 2 / 3 = 0.67', () => {
+    expect(Division('2', '3', 2)).toEqual('0.67');
+  });
+
+  it('should divide with 2 decimal and keep the last one 1 / 3 = 0.33', () => {
+    expect(Division('1', '3', 2)).toEqual('0.33');
+  });
+
+  it('should divide with 0 decimal and round up the number 2 / 3 = 1', () => {
+    expect(Division('2', '3', 0)).toEqual('1');
+  });
+
+  it('should divide with 0 decimal and discard the rest 1 / 3 = 0', () => {
+    expect(Division('1', '3', 0)).toEqual('0');
   });
 });

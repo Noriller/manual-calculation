@@ -17,6 +17,8 @@ export function Division(
     throw new Error('Division by zero');
   }
 
+  const maxDigitsForRounding = maxDigits + 1;
+
   let divisorFloat = getFloatPosition(divisor);
   let dividendFloat = getFloatPosition(dividend);
   const maxFloat = Math.max(divisorFloat, dividendFloat);
@@ -73,7 +75,7 @@ export function Division(
 
   while (currentDivisor !== '0') {
     while (leftIsBigger(preparedNumbers[1], currentDivisor)) {
-      if (++digits > maxDigits) break;
+      if (++digits > maxDigitsForRounding) break;
       if (quotient === '') {
         if (startWithZero) {
           zeroAppends++;
@@ -85,7 +87,9 @@ export function Division(
       currentDivisor = currentDivisor.concat('0');
     }
 
-    if (digits > maxDigits) break;
+    if (digits > maxDigitsForRounding) {
+      break;
+    }
 
     const { toSubtract, quotientAdd } = getNumberToSubtract(
       currentDivisor,
@@ -96,17 +100,29 @@ export function Division(
     quotient = Sum(quotient, quotientAdd);
   }
 
-  if (zeroAppends > 0) {
-    quotient = '0'.repeat(zeroAppends).concat(quotient);
+  if (zeroAppends > 0 || startWithZero) {
+    const startWithZeroAdd = 1;
+    quotient = '0'.repeat(zeroAppends + startWithZeroAdd).concat(quotient);
+  }
+
+  if (digits > maxDigitsForRounding) {
+    const quotientArr = quotient.split('');
+    // rounding up if the last digit is 5 or more
+    if (Number(quotientArr.pop()) > 4) {
+      quotientArr.push(String(Number(quotientArr.pop()) + 1));
+    }
+    quotient = quotientArr.join('');
   }
 
   if (startWithZero) {
-    quotient = '0.'.concat(quotient);
+    const [zero, ...rest] = quotient.split('');
+    quotient = zero.concat('.').concat(rest.join(''));
   } else if (digits > 0) {
-    quotient = addFloatToString(quotient, digits);
+    const digitForRoundingAdjust = digits > maxDigitsForRounding ? 1 : 0;
+    quotient = addFloatToString(quotient, digits - digitForRoundingAdjust);
   }
 
-  quotient = quotient.replace(/\.?0+$/, '');
+  quotient = quotient.replace(/\.?0*$/, '');
 
   if (signs[0] !== signs[1] && quotient !== '0') {
     quotient = '-'.concat(quotient);
