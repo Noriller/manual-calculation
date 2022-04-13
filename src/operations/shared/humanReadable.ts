@@ -3,8 +3,6 @@
  */
 export function humanReadable(number: string) {
   const [integer, decimal] = number.split('.');
-  return integer
-    .replace(/\B(?=(\d{3})+(?!\d))/g, '_')
-    .concat('.')
-    .concat(decimal);
+  const decimalPart = decimal ? `.${decimal}` : '';
+  return integer.replace(/\B(?=(\d{3})+(?!\d))/g, '_').concat(decimalPart);
 }

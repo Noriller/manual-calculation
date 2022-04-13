@@ -22,8 +22,8 @@ export function ManualCalculator({
      * This adds any number of numbers together.
      */
     sum: (...numbers: string[]) => {
+      checkInput(numbers);
       const nums = numbers.map((s) => s.replace(/_/g, ''));
-      checkInput(nums);
       const result = Sum(...nums);
       return useHumanReadableNumbers ? humanReadable(result) : result;
     },
@@ -31,8 +31,8 @@ export function ManualCalculator({
      * This subtracts a subtrahend from the minuend.
      */
     subtraction: (minuend: string, subtrahend: string) => {
+      checkInput([minuend, subtrahend]);
       const nums = [minuend.replace(/_/g, ''), subtrahend.replace(/_/g, '')];
-      checkInput(nums);
       const result = Subtraction(nums[0], nums[1]);
       return useHumanReadableNumbers ? humanReadable(result) : result;
     },
@@ -40,11 +40,11 @@ export function ManualCalculator({
      * This multiplies the multiplicand and the multiplier.
      */
     multiplication: (multiplicand: string, multiplier: string) => {
+      checkInput([multiplicand, multiplier]);
       const nums = [
         multiplicand.replace(/_/g, ''),
         multiplier.replace(/_/g, ''),
       ];
-      checkInput(nums);
       const result = Multiplication(nums[0], nums[1]);
       return useHumanReadableNumbers ? humanReadable(result) : result;
     },
@@ -52,8 +52,8 @@ export function ManualCalculator({
      * This divides the dividend by the divisor.
      */
     division: (dividend: string, divisor: string) => {
+      checkInput([dividend, divisor]);
       const nums = [dividend.replace(/_/g, ''), divisor.replace(/_/g, '')];
-      checkInput(nums);
       const result = Division(nums[0], nums[1], divisionDigits);
       return useHumanReadableNumbers ? humanReadable(result) : result;
     },
