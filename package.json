@@ -1,5 +1,5 @@
 {
-  "name": "@noriller/manual-calculation",
+  "name": "@noriller/manual-calculator",
   "private": false,
   "version": "0.0.0",
   "description": "Base 10 calculation algorithm using strings. This is basically how you would calculate on pen and paper.",
@@ -20,7 +20,7 @@
     "packPublish": "node buildPack.js",
     "packPublish:dryRun": "yarn packPublish && npm publish ./out/*.tgz --dry-run",
     "packPublish:publish": "yarn packPublish && yarn publish ./out/*.tgz",
-    "benchmark:run": "for file in benchmark/*; do node \"$file\"; done",
+    "benchmark:run": "for file in performance/tests/*; do node \"$file\"; done",
     "benchmark": "yarn build:prod && yarn benchmark:run"
   },
   "devDependencies": {

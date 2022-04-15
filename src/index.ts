@@ -14,49 +14,70 @@ import { Sum } from './operations/sum/sum';
  * Remember to always pass the numbers as strings.
  */
 export function ManualCalculator({
-  useHumanReadableNumbers = true,
+  useHumanReadableNumbers = false,
   divisionDigits = 10,
 }: ManualCalculatorOptions = {}) {
+  const sum = (...numbers: string[]) => {
+    checkInput(numbers);
+    const nums = numbers.map((s) => s.replace(/_/g, ''));
+    const result = Sum(...nums);
+    return useHumanReadableNumbers ? humanReadable(result) : result;
+  };
+
+  const subtraction = (minuend: string, subtrahend: string) => {
+    checkInput([minuend, subtrahend]);
+    const nums = [minuend.replace(/_/g, ''), subtrahend.replace(/_/g, '')];
+    const result = Subtraction(nums[0], nums[1]);
+    return useHumanReadableNumbers ? humanReadable(result) : result;
+  };
+
+  const multiplication = (multiplicand: string, multiplier: string) => {
+    checkInput([multiplicand, multiplier]);
+    const nums = [multiplicand.replace(/_/g, ''), multiplier.replace(/_/g, '')];
+    const result = Multiplication(nums[0], nums[1]);
+    return useHumanReadableNumbers ? humanReadable(result) : result;
+  };
+
+  const division = (dividend: string, divisor: string) => {
+    checkInput([dividend, divisor]);
+    const nums = [dividend.replace(/_/g, ''), divisor.replace(/_/g, '')];
+    const result = Division(nums[0], nums[1], divisionDigits);
+    return useHumanReadableNumbers ? humanReadable(result) : result;
+  };
+
   return {
     /**
      * This adds any number of numbers together.
      */
-    sum: (...numbers: string[]) => {
-      checkInput(numbers);
-      const nums = numbers.map((s) => s.replace(/_/g, ''));
-      const result = Sum(...nums);
-      return useHumanReadableNumbers ? humanReadable(result) : result;
-    },
+    sum,
+    /**
+     * This adds any number of numbers together.
+     */
+    add: sum,
     /**
      * This subtracts a subtrahend from the minuend.
      */
-    subtraction: (minuend: string, subtrahend: string) => {
-      checkInput([minuend, subtrahend]);
-      const nums = [minuend.replace(/_/g, ''), subtrahend.replace(/_/g, '')];
-      const result = Subtraction(nums[0], nums[1]);
-      return useHumanReadableNumbers ? humanReadable(result) : result;
-    },
+    subtraction,
+    /**
+     * This subtracts a subtrahend from the minuend.
+     */
+    subtract: subtraction,
     /**
      * This multiplies the multiplicand and the multiplier.
      */
-    multiplication: (multiplicand: string, multiplier: string) => {
-      checkInput([multiplicand, multiplier]);
-      const nums = [
-        multiplicand.replace(/_/g, ''),
-        multiplier.replace(/_/g, ''),
-      ];
-      const result = Multiplication(nums[0], nums[1]);
-      return useHumanReadableNumbers ? humanReadable(result) : result;
-    },
+    multiplication,
+    /**
+     * This multiplies the multiplicand and the multiplier.
+     */
+    multiply: multiplication,
     /**
      * This divides the dividend by the divisor.
      */
-    division: (dividend: string, divisor: string) => {
-      checkInput([dividend, divisor]);
-      const nums = [dividend.replace(/_/g, ''), divisor.replace(/_/g, '')];
-      const result = Division(nums[0], nums[1], divisionDigits);
-      return useHumanReadableNumbers ? humanReadable(result) : result;
-    },
+    division,
+    /**
+     * This divides the dividend by the divisor.
+     */
+    divide: division,
   };
 
   /**
