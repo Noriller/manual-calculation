@@ -106,6 +106,8 @@ type ManualCalculatorOptions = {
   /**
    * This is the number of digits after the decimal point.
    *
+   * This applies only for the division operation.
+   *
    * It defaults to 10 digits.
    */
   divisionDigits?: number;

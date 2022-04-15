@@ -3,7 +3,7 @@
 This is a calculator that works as we make calculations on pen and paper, in other words, it's a base 10 calculator.
 
 - The biggest advantage of this is that we are not constrained by the number wrapping and binary rounding errors.
-- The biggest disavantage is, of course, performance. (See the [Performance](##performance) section for more information.)
+- The biggest disavantage is, of course, performance. (See the [Performance](#performance) section for more information.)
 
 So, if you need to be sure that `0.1 + 0.2 == 0.3`, you can use this calculator. And of course, if you want to use numbers beyond what JS can handle, including with BigInt and especially with decimals, you can use this calculator.
 
@@ -60,6 +60,7 @@ const calculator = ManualCalculator({
   // If this is set to false, the result will not be formatted.
   useHumanReadableNumbers: false; // default: false
   // This is the number of digits after the decimal point.
+  // This applies only for the division operation.
   divisionDigits: 10; // default: 10
 });
 ```
@@ -72,7 +73,7 @@ I've run tests using small numbers, BigInts and numbers beyond that with and wit
 
 The tests are in the `benchmark` folder and five runs are in the `benchmark/results` folder.
 
-As you might expect, it's hard to have anything closer to binary implementation of a language. But if you keep running calculations on the same object, then you will see that the performance will be much better.
+As you might expect, it's hard to have anything closer to binary implementation of a language. But if you keep running calculations on the same object, then you will see that the performance will get better than the first couple of runs, but still nowhere close to the performance of JS.
 
 ### Tests and infinite division
 
@@ -121,9 +122,9 @@ Feel free to contribute, to open issues, bug reports or just to say hello! ðŸ¤œð
 
 In case of bugs or errors, if possible, send an example of the problem and what it should return.
 
-I believe it should as precise as you can be with pen and paper, but then again, who knows.
+I believe it should as precise as you can be with pen and paper, but then again, I couldn't test with all possible combinations.
 
-Also, I'm not a matemathician... if you know a way to improve the performance, please let me know!
+Also, I'm not a matemathician... if you know a way to improve the performance, let me know!
 
 ## Work with me
 
