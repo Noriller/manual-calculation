@@ -1,7 +1,7 @@
 {
   "name": "@noriller/manual-calculator",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Base 10 calculation algorithm using strings. This is basically how you would calculate on pen and paper.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
