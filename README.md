@@ -22,11 +22,11 @@ yarn add @noriller/manual-calculator
 Then import it with the syntax of your choice
 
 ```js
-import EasyFilter from '@noriller/manual-calculator'
+import ManualCalculator from '@noriller/manual-calculator'
 ```
 
 ```js
-const EasyFilter = require('@noriller/manual-calculator')
+const ManualCalculator = require('@noriller/manual-calculator')
 ```
 
 Finally, to actually use it:

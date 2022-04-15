@@ -1,4 +1,4 @@
-import { ManualCalculator } from './';
+import ManualCalculator from './';
 
 describe('ManualCalculator', () => {
   it('should add two numbers', () => {

@@ -13,7 +13,7 @@ import { Sum } from './operations/sum/sum';
  *
  * Remember to always pass the numbers as strings.
  */
-export function ManualCalculator({
+function ManualCalculator({
   useHumanReadableNumbers = false,
   divisionDigits = 10,
 }: ManualCalculatorOptions = {}) {
@@ -110,3 +110,5 @@ type ManualCalculatorOptions = {
    */
   divisionDigits?: number;
 };
+
+export = ManualCalculator;

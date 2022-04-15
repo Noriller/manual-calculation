@@ -1,4 +1,4 @@
-const { ManualCalculator } = require('../../../dist/index');
+const ManualCalculator = require('../../dist/index');
 
 const calculator = ManualCalculator({
   useHumanReadableNumbers: false,
