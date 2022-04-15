@@ -47,6 +47,8 @@ Finally, to actually use it:
   calculator.division('5', '5');
 ```
 
+Remember to always pass a string or else you'll get an error!
+
 ### Options
 
 There's two options available:
