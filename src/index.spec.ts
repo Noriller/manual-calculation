@@ -47,6 +47,14 @@ describe('ManualCalculator', () => {
     expect(calculator.division('2', '3')).toBe('0.67');
   });
 
+  it('should use human readable and decimals', () => {
+    const calculator = ManualCalculator({
+      useHumanReadableNumbers: true,
+      divisionDigits: 2,
+    });
+    expect(calculator.division('20_000', '30_000')).toBe('0.67');
+  });
+
   it('should throw an error if the inputs are not valid', () => {
     const calculator = ManualCalculator();
     // @ts-expect-error checking for invalid input

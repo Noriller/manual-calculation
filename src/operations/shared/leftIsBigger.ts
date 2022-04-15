@@ -17,9 +17,3 @@ export function leftIsBigger(left: string, right: string): boolean {
   }
   return false;
 }
-/**
- * Return false only if left is bigger than right
- */
-export function rightIsBigger(left: string, right: string): boolean {
-  return !leftIsBigger(left, right);
-}
