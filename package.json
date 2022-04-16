@@ -14,14 +14,14 @@
     "prepare": "husky install",
     "cleanDist": "npx rimraf dist/*",
     "build": "tsc",
-    "prebuild:prod": "yarn cleanDist",
+    "prebuild:prod": "$npm_execpath run cleanDist",
     "build:prod": "tsc -p ./tsconfig.build.json && tsc -p ./tsconfig.nocomments.json",
-    "prepackPublish": "yarn build:prod",
+    "prepackPublish": "$npm_execpath run build:prod",
     "packPublish": "node buildPack.js",
-    "packPublish:dryRun": "yarn packPublish && npm publish ./out/*.tgz --dry-run",
-    "packPublish:publish": "yarn packPublish && yarn publish ./out/*.tgz",
+    "packPublish:dryRun": "$npm_execpath run packPublish && npm publish ./out/*.tgz --dry-run",
+    "packPublish:publish": "$npm_execpath run packPublish && $npm_execpath publish ./out/*.tgz",
     "benchmark:run": "for file in performance/tests/*; do node \"$file\"; done",
-    "benchmark": "yarn build:prod && yarn benchmark:run"
+    "benchmark": "$npm_execpath run build:prod && $npm_execpath run benchmark:run"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",

@@ -114,6 +114,36 @@ Meanwhile, the infinite division tests:
 
 Apparently there's some exponential growth in the division, but that should only be a bigger problem if you really need thousands of digits.
 
+### Test it yourself
+
+```bash
+npm install
+npm run benchmark
+```
+
+or
+
+```bash
+yarn install
+yarn benchmark
+```
+
+This will compile the necessary files and run all tests in performance/tests. (You can also add or modify them)
+
+And after running it once, and if you didn't change the `src` folder, then you can just:
+
+```bash
+npm run benchmark:run
+```
+
+or
+
+```bash
+yarn benchmark:run
+```
+
+This will only run the tests without building everything again.
+
 ## There's a problem or it could be better
 
 Either if you're encountered a problem: 😢 or if you're have an idea to make it better: 🤩
